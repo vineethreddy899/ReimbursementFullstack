@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Reimbursement.Appliction\Reimbursement.Application.csproj" />
+    <ProjectReference Include="..\Reimbursement.Domain\Reimbursement.Domain.csproj" />
+    <ProjectReference Include="..\Reimbursement.Infrastructure\Reimbursement.Infrastructure.csproj" />
+    <ProjectReference Include="..\Reimbursement.Logging\Reimbursement.Logging.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Images\" />
+  </ItemGroup>
+
+</Project>
