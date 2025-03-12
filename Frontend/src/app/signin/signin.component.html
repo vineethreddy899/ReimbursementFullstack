@@ -1,0 +1,20 @@
+<div class="signupFrm">
+    <div class="wrapper">
+        <form [formGroup]="log" action="" class="form" (ngSubmit)="auth()"> 
+            <h1 class="text-center text-success">Reimbursement Portal</h1>
+            <h2 class="title ">Sign In</h2>
+            <div class="inputContainer ">
+                <input type="text" class="input " placeholder="a " formControlName="email">
+                <label for=" " class="label ">Email</label>
+            </div>
+            <div class="inputContainer ">
+                <input type="password" class="input" placeholder="a "formControlName="pass">
+                <label for=" " class="label ">Password</label>
+            </div>
+            <input type="submit" class="submitBtn mx-auto " value="Sign in">
+            <a class="mx-auto" routerLink="/signup">Register New User</a>
+        </form>
+    </div>
+</div>
+
+<router-outlet> </router-outlet>

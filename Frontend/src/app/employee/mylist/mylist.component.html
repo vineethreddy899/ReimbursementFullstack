@@ -1,0 +1,184 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Claims</a>
+    <a id="LogoutBtn" routerLink="/signin" class="btn btn-outline-success"
+      >Logout</a
+    >
+  </div>
+</nav>
+
+
+<div class="d-flex justify-content-end">
+  <button
+    type="button"
+    class="m-3 btn btn-outline-success"
+    (click)="triggerModal(modalData)"
+  >
+    Add new Reimbursement
+  </button>
+</div>
+<!-- for adding  -->
+<ng-template #modalData let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add New Reimbursement</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div *ngIf="isAdded" class=" alert alert-success alert-dismissible fade show " role="alert ">
+        <strong>Success!</strong>The Reimbursement is Added
+        <button (click)="isAdded=!isAdded" type="button " class="close " data-dismiss="alert " aria-label="Close ">
+          <span aria-hidden="true ">&times;</span>
+        </button>
+    </div>
+    <div *ngIf="errorAdded!=''" class="alert-danger">*{{errorAdded}}</div>
+    <form [formGroup]="add" (ngSubmit)="addRecord()">
+      <div class="mb-3">
+        <label for="Date" class="form-label">Date*</label>
+        <input type="date" class="form-control"formControlName="Date" />
+      </div>
+      <div class="inputContainer mb-3">
+        <label for="reimtype" class="form-label">Reimbursement Type*</label>
+        <select class="form-control" id="reimtype"formControlName="ReimbursementType">
+          <option>Medical</option>
+          <option>Travel</option>
+          <option>Food</option>
+          <option>Entertainment</option>
+          <option>Misc</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="Date" class="form-label">Requested Value*</label>
+        <input type="number" class="form-control" formControlName="RequestedValue"/>
+      </div>
+      <div class="inputContainer mb-5">
+        <label for="curr" class="form-label">Currency*</label>
+        <select class="form-control" id="curr" formControlName="Currency">
+          <option>INR</option>
+          <option>USD</option>
+          <option>EURO</option>
+        </select>
+      </div>
+      <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+
+      <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+  </div>
+</ng-template>
+
+
+<div *ngIf="isDeleted" class=" alert alert-success alert-dismissible fade show " role="alert ">
+    <strong>Success!</strong>The Reimbursement is Deleted
+    <button (click)="isDeleted=!isDeleted"type="button " class="close " data-dismiss="alert " aria-label="Close ">
+      <span aria-hidden="true ">&times;</span>
+    </button>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Reimbursement Type</th>
+      <th scope="col">Reimbursement Value</th>
+      <th scope="col">Approved Value</th>
+      <th scope="col">Currency</th>
+      <th scope="col">Request Phase</th>
+      <th scope="col">Receipt Attached</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of collection" class="head">
+      <td>{{ item.Date.substring(0, 10) }}</td>
+      <td>{{ item.ReimbursementType }}</td>
+      <td>{{ item.RequestedValue }}</td>
+      <td>
+        {{ item.ApprovedValue }}
+      </td>
+      <td>{{ item.Currency }}</td>
+      <td>
+        {{ item.RequestPhase }}
+      </td>
+      <td>
+          <a *ngIf="item.ImagePath!=''||item.ImagePath!=null"  >{{createImgPath(item.ImagePath)}}</a>
+        
+       
+       
+      </td>
+
+      <td>
+        <a (click)="triggerModal(EditmodalData,item)"
+          ><img
+            style="margin: 0px 5px"
+            src="https://img.icons8.com/material-outlined/30/000000/edit.png"
+        /></a>
+        <!-- for edit  -->
+<ng-template #EditmodalData let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit Reimbursement</h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div *ngIf="isEdited" class=" alert alert-success alert-dismissible fade show " role="alert ">
+          <strong>Success!</strong>The Reimbursement is Edited
+          <button (click)="isEdited=!isEdited" type="button " class="close " data-dismiss="alert " aria-label="Close ">
+            <span aria-hidden="true ">&times;</span>
+          </button>
+      </div>
+      <div *ngIf="errorEdited!=''" class="alert-danger">*{{errorEdited}}</div>
+      <!-- for showing error -->
+      <!-- <div *ngIf="isAdded">shcjbs</div> -->
+      <form [formGroup]="edit" (ngSubmit)="editRecord(item,item.Id)">
+        <div class="mb-3">
+          <label for="Date" class="form-label">Date*</label>
+          <input type="date" class="form-control"formControlName="Date" />
+        </div>
+        <div class="inputContainer mb-3">
+          <label for="reimtype" class="form-label">Reimbursement Type*</label>
+          <select class="form-control" id="reimtype"formControlName="ReimbursementType">
+            <option>Medical</option>
+            <option>Travel</option>
+            <option>Food</option>
+            <option>Entertainment</option>
+            <option>Misc</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="Date" class="form-label">Requested Value*</label>
+          <input type="number" class="form-control" formControlName="RequestedValue"/>
+        </div>
+        <div class="inputContainer mb-5">
+          <label for="curr" class="form-label">Currency*</label>
+          <select class="form-control" id="curr" formControlName="Currency">
+            <option>INR</option>
+            <option>USD</option>
+            <option>EURO</option>
+          </select>
+        </div>
+        <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </ng-template>
+        <a (click)="deleteRecord(item.Id)"
+          ><img
+            style="margin: 0px 5px"
+            src="https://img.icons8.com/ios-glyphs/30/000000/filled-trash.png"
+        /></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<router-outlet> </router-outlet>

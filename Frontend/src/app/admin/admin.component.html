@@ -1,0 +1,22 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Claims</a>
+    <a id="LogoutBtn" routerLink="/signin" class="btn btn-outline-success"
+      >Logout</a
+    >
+  </div>
+</nav>
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a [ngClass]="tab==1?'nav-item nav-link active':'nav-item nav-link'" (click)="tab=1" id="nav-home-tab" data-toggle="tab"  role="tab" aria-controls="nav-home" aria-selected="true">Pending Requests</a>
+      <a [ngClass]="tab==2?'nav-item nav-link active':'nav-item nav-link'" (click)="tab=2" id="nav-profile-tab" data-toggle="tab"  role="tab" aria-controls="nav-profile" aria-selected="false">Approved</a>
+      <a [ngClass]="tab==3?'nav-item nav-link active':'nav-item nav-link'" (click)="tab=3"  id="nav-contact-tab" data-toggle="tab"  role="tab" aria-controls="nav-contact" aria-selected="false">Declined</a>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div [ngClass]="tab==1?'tab-pane fade show active':'tab-pane fade'" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"><app-pending></app-pending></div>
+    <div [ngClass]="tab==2?'tab-pane fade show active':'tab-pane fade'" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"><app-approved></app-approved></div>
+    <div [ngClass]="tab==3?'tab-pane fade show active':'tab-pane fade'" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab"><app-declined></app-declined></div>
+  </div>
+       
+  

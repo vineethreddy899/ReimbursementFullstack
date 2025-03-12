@@ -1,0 +1,82 @@
+<div class="signupFrm">
+  <div class="wrapper">
+    
+    <form [formGroup]="log" class="form" (ngSubmit)="auth()">
+      <h1 class="title">Sign Up</h1>
+      <div *ngIf="isCreated" class=" alert alert-success alert-dismissible fade show " role="alert ">
+        <strong>Success!</strong>New Account Created now login 
+        <button (click)="isCreated=!isCreated" type="button " class="close " data-dismiss="alert " aria-label="Close ">
+          <span aria-hidden="true ">&times;</span>
+        </button>
+    </div>
+      <div *ngIf="errorMessage!=''" class="alert-danger mb-4">*{{errorMessage}}</div>
+      <div class="inputContainer">
+        <input type="text" class="input" placeholder="a "formControlName="email" />
+        <label for=" " class="label">Email</label>
+      </div>
+      <div class="inputContainer">
+        <input type="text" class="input" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="a " formControlName="pass"/>
+        <label for=" " class="label">Password</label>
+      </div>
+      <div class="inputContainer">
+        <input type="text" class="input" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required placeholder="a "formControlName="conpass" />
+        <label for=" " class="label">Re-type Password</label>
+      </div>
+      <div class="inputContainer">
+        <input type="text" class="input" placeholder="a " formControlName="name"/>
+        <label for=" " class="label">Full Name</label>
+      </div>
+      <div class="inputContainer">
+        <input type="text" class="input" placeholder="a " formControlName="pan"/>
+        <label for=" " class="label">PAN Number</label>
+      </div>
+      <div class="inputContainer">
+        <select class="form-control" id="exampleFormControlSelect1" formControlName="bank" aria-placeholder="Bank">
+        <option  disabled selected>Select your Bank</option>
+          <option>Bank of Baroda</option>
+          <option>Bank of Maharashtra</option>
+          <option>Bank of India</option>
+          <option>Canara Bank</option>
+          <option>Central Bank of India</option>
+          <option>Indian Bank</option>
+          <option>Indian Overseas Bank</option>
+          <option>Punjab & Sind Bank</option>
+          <option>Punjab National Bank</option>
+          <option>State Bank of India</option>
+          <option>UCO Bank</option>
+          <option>Union Bank of India</option>
+          <option>Axis Bank Ltd.</option>
+          <option>Bandhan Bank Ltd.</option>
+          <option>CSB Bank Ltd.</option>
+          <option>City Union Bank Ltd.</option>
+          <option>DCB Bank Ltd.</option>
+          <option>Dhanlaxmi Bank Ltd.</option>
+          <option>Federal Bank Ltd.</option>
+          <option>HDFC Bank Ltd</option>
+          <option>ICICI Bank Ltd.</option>
+          <option>Induslnd Bank Ltd</option>
+          <option>IDFC First Bank Ltd.</option>
+          <option>Jammu & Kashmir Bank Ltd.</option>
+          <option>Karnataka Bank Ltd.</option>
+          <option>Karur Vysya Bank Ltd.</option>
+          <option>Kotak Mahindra Bank Ltd</option>
+          <option>Lakshmi Vilas Bank Ltd.</option>
+          <option>Nainital Bank Ltd.</option>
+          <option>RBL Bank Ltd.</option>
+          <option>South Indian Bank Ltd.</option>
+          <option>Tamilnad Mercantile Bank Ltd.</option>
+          <option>YES Bank Ltd.</option>
+          <option>IDBI Bank Ltd.</option>
+        </select>
+      </div>
+      <div class="inputContainer">
+        <input type="text" class="input" placeholder="a "formControlName="bankAccount" />
+        <label for=" " class="label">Bank Account Number</label>
+      </div>
+
+      <input type="submit" class="submitBtn mx-auto" value="Sign up " />
+      <a class="mx-auto" routerLink="/signin">Sign In</a>
+    </form>
+  </div>
+</div>
+<router-outlet> </router-outlet>

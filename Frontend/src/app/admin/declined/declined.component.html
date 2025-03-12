@@ -1,0 +1,51 @@
+<div class="row container-fluid m-3">
+    <form [formGroup]="filter" class="d-flex w-75 p-3" (ngSubmit)="getFilter()">
+    <input class="form-control w-50 me-2" type="search" placeholder="Search by email..." aria-label="Search" formControlName="mail">
+    <select class="form-control w-25  me-2" id="curr" formControlName="type">
+        <option>Request type (All)</option>
+        <option>Medical</option>
+        <option>Travel</option>
+        <option>Food</option>
+        <option>Entertainment</option>
+        <option>Misc</option>
+      </select>
+    <button class="btn btn-outline-success" type="submit">Search</button>
+
+
+  </form>
+  
+
+ 
+</div>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Requested By</th>
+        <th scope="col">Reimbursement Type</th>
+        <th scope="col">Requested Value</th>
+        <th scope="col">Approved Value</th>
+        <th scope="col">Currency</th>
+        <th scope="col">Receipt Attached</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of collection" class="head">
+        <td>{{item.date.substring(0, 10)}}</td>
+        <td>{{item.creator.email}}</td>
+        <td>{{item.reimbursementType}}</td>
+        <td>{{item.requestedValue}}</td>
+        <td>
+          {{item.approvedValue}}
+        </td>
+        <td>{{item.currency}}</td>
+      
+        <td>
+            <a *ngIf="item.ImagePath!=''||item.ImagePath!=null"  >{{createImgPath(item.imagePath)}}</a>
+        </td>
+  
+       
+      </tr>
+    </tbody>
+  </table>
